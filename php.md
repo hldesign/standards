@@ -68,3 +68,52 @@ Indentation is **always symmetrical**. Any opening syntax construct that begins 
 
 	// Also okay, since the whole structure is defined on one line.
 	$params = array('controller' => $params['plugin'], 'action' => $params['controller'], 'pass' => $params['pass']);
+	
+## Operators
+
+All [operators ](http://php.net/manual/en/language.operators.php) must be surrounded by spaces<sup>?</sup>.
+
+	$x = $y;
+	'x' . 'y';
+	$x || $y;
+	$x ?: $y;
+	$x ? $x : $y;
+	$x += $y;
+	$x - $y;
+	$x - 23;
+	function($x, $y = null) {};
+
+However there are a few exceptions to the spacing rule<sup>?</sup>:
+
+1. Increment and decrement operators must be directly followed by or following the variable.
+
+2. The exclamation mark must be directly followed by the variable.
+
+3. Colons appearing as part of a case condition must have no spaces surrounding them.
+
+4. Labels must have no spaces surrounding them.
+
+5. Negative **literal** integers or floats must have the minus sign directly attached.
+
+6. Minus signs involved in negations of i.e. variables can be spaced or directly attached.
+```
+$x--;
+$x++;
+!$x;
+-23;
+- $x;
+-$x;
+case 'x':
+:x
+```
+In order to increase readability of the code it is allowed to use spaces **or** tabs before operators in certain cases.
+
+1. Multiple function calls.
+2. Concatenating a long message.
+```
+$those    = examples($are);
+$the      = best($ones);
+
+$message  = 'this message is spread over ';
+$message .= 'multiple lines.';
+```
