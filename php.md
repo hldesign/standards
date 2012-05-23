@@ -186,12 +186,11 @@ Parentheses _may_ be added to the conditional expression or entire ternary state
 ## Variables
 
 Variable names should be as descriptive as possible, but also as short as possible. Normal variables should start with a lowercase letter, and should be written in [wiki:CamelBack camelBack] in case of multiple words. Note that even variables containing objects must **not** start with a capital letter.
-```
+
 	$user = 'John';
 	$users = array('John', 'Hans', 'Arne');
 
 	$dispatcher = new Dispatcher();
-```
 
 Array keys used in `$options`/results arrays should be formatted according to the same rules as properties/variables.
 
