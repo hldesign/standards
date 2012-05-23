@@ -29,11 +29,11 @@ Well, unless you are in a view and want the variable data to be automatically pr
 **One tab** will be used for indentation. So, indentation should look like this:
 
     <?php
-    // Base level
-        // Level 1
-	    // Level 2
-	// Level 1
-    // Base level
+        // Base level
+            // Level 1
+	        // Level 2
+	    // Level 1
+        // Base level
 
 Indentation is **always symmetrical**. Any opening syntax construct that begins on a new line should be matched with a closing construct (that also begins on a new line) indented at the same level.  Any lines enclosed by a beginning and ending construct should be indented exactly one tab in from the enclosing lines. If the contents of an enclosure are broken out over multiple lines, then no enclosed elements should be on the same line as the enclosing structures.
 
