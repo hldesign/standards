@@ -275,3 +275,31 @@ Namespaces should be written in lowercase singular form, example:
 
 	// Good.
 	namespace lithium\data\source;
+	
+## Classes
+
+### Name
+
+Class names should be written in _CamelCase_, for example:
+
+	class Foo {
+	   // ...
+	}
+
+Class names should always be singular nouns, i.e. ```Dispatcher```, ```PagesController``` or ```Environment```, unless they are __collection__ classes.
+
+### Member Visibility
+
+All methods and properties must have  a visibility operator. The `var` operator is forbidden.<sup>?</sup>
+
+A **protected** method or variable name start with a single underscore ("`_`").
+
+	class Foo {
+		protected $_iAmAProtectedVariable;
+
+		protected function _iAmAProtectedMethod() {
+			// ...
+		}
+	}
+
+A private method or variables: **This is a framework, it should be extensible.**  As such, there's no reason to ever use private methods or variables.
