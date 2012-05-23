@@ -4,8 +4,6 @@
 
 File names should be created with *CamelCase* (according to the class they contain).
 
-Tabs is not allwed! `4 spaces` should be used.
-
 ### Lines
 
 Lines must not exceed a limit of **100 characters**.<sup>?</sup> The soft limit is 80 characters. Lines should not have any trailing whitespace characters.<sup>?</sup>
@@ -26,7 +24,7 @@ Well, unless you are in a view and want the variable data to be automatically pr
     
 ## Indentation
 
-**One tab** will be used for indentation. So, indentation should look like this:
+**One tab** (`4 spaces`) will be used for indentation. So, indentation should look like this:
 
     <?php
 	// Base level
