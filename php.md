@@ -303,3 +303,108 @@ A **protected** method or variable name start with a single underscore ("`_`").
 	}
 
 A private method or variables: **This is a framework, it should be extensible.**  As such, there's no reason to ever use private methods or variables.
+
+### Anatomy
+
+This defines the basic anatomy of a Lithium class, by the numbers:
+
+	<?php
+
+	namespace my\package; // (1)
+
+	use my\package\util\Foo; // (2)
+	use my\package\util\Bar;
+
+	class AwesomeSocket extends \lithium\core\Object { // (3)
+
+		protected $_classes = array( // (4)
+			'query' => 'lithium\model\Query',
+			'record' => 'lithium\model\Record'
+		);
+
+		public function __construct($config = array()) { // (5)
+			// Minimum class bootstrap logic here...
+			parent::__construct($config);
+		}
+
+		protected function _init() { // (6)
+			// Any additional bootstrap logic here...
+		}
+	}
+
+	?>
+
+#### Legend
+
+1. **Namespaces**: classes should always begin with a namespace definition.  This definition should always be preceded by a single newline, and as always, all PHP blocks should begin with a full `<?php` long tag.
+1. **Static dependencies**: any basic, unchangeable utility classes which this class depends on or otherwise references should go here.  Class references should be fully resolved but must not have a leading backslash (`\`).
+1. **Class definition**: this is the only place where classes may be used without being referenced or imported elsewhere (i.e. neither statically nor dynamically).  As with static dependencies, the parent class reference should be fully resolved.
+1. **Dynamic dependencies**: any classes on which this class depends that can be changed through configuration.  These may be classes that this class instantiates, or that are used statically.  Keys of this array should be the name of the class dependency in camelBack format, and the value should be a fully-namespaced class reference.
+1. **Constructor**: constructors must always accept exactly one parameter, which must be an array.  Only required class bootstrapping code should be put here.  This makes classes easier to test.  For static classes, this should be replaced with `public static function __init()`, which takes no parameters.  This method is called when the class is first loaded into memory.
+1. **Initializer**: any additional class bootstrapping code goes here.  This method is automatically called by `Object::__construct()`, which may be disabled by passing `'init' => false` to `parent::__construct()`.
+
+### Methods
+
+A common method grammar and vocabulary should be adhered to as much as possible, and concise, memorable method names should be used in all other cases.  Prefixes and suffixes like `get*` and `set*` should always be avoided.  Method names should always communicate exactly what they do, without containing any redundancies, particularly with respect to the class name, i.e. `Dispatcher::dispatch()` (wrong).  Where possible, method names should also communicate whether the method is a "sub-routine" (performs an action) or a "pure function" (returns a value), for example:
+
+ * `run()` (sub-routine)
+ * `find()` (function)
+ * `set()` (sub-routine)
+ * `value()` (function)
+
+If a function has a reciprocal sub-routine (or vice-versa), they should be combined where possible, using an optional parameter to differentiate.  The basic pattern is as follows:
+
+	public function value($value = null) {
+		if ($value === null) {
+			return $this->value;
+		}
+		$this->value = $value;
+	}
+
+## Importing/Including
+
+### Including
+
+When including files with classes or libraries, use only and always the [require_once](http://php.net/require_once) function. Don't use brackets with the include statements as they are language constructs.<sup>?</sup>
+
+### Importing
+
+When importing classes, names should never be aliased unless absolutely necessary to avoid collision.
+
+ * Good: `use lithium\util\Inflector;`
+ * Bad: `use lithium\util\Inflector as Inflector;`
+
+Except for the `extends` part of the class declaration, all namespaced class references should never be used inline in code.  Instead, the reference should be declared at the top of the class.
+
+	// Good.
+	class Bar extends \lithium\Foo {
+		// ...
+	}
+
+	// Good.
+	class Baz extends \lithium\core\Object {
+		// ...
+		$bar = new Bar();
+		// ...
+	}
+
+	// Bad.
+	class Baz extends lithium\core\Object {
+		// ...
+		$bar = new lithium\foo\Bar();
+		// ...
+	}
+
+Names appearing after the `use` keyword are always fully qualified but must not have a leading backslash.<sup>?</sup>
+
+ * Good: `use lithium\util\Inflector;`
+ * Bad: `use \lithium\util\Inflector;`
+
+
+### Errors and Exceptions
+
+Exceptions must not be used for flow control (they're quite expensive as are errors, a stack trace must be generated).
+
+Use exceptions only if the situation is really exceptional and doesn't occur under **normal** conditions (i.e. trying to read a file and file does not exist/is not readable).
+
+Use [SPL exceptions](http://php.net/manual/en/spl.exceptions.php) or those provided by the framework you use. 
