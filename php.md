@@ -113,7 +113,6 @@ In order to increase readability of the code it is allowed to use spaces **or** 
 ```
 $those    = examples($are);
 $the      = best($ones);
-
 $message  = 'this message is spread over ';
 $message .= 'multiple lines.';
 ```
