@@ -31,7 +31,7 @@ Well, unless you are in a view and want the variable data to be automatically pr
     <?php
 	// Base level
 		// Level 1
-	        	// Level 2
+			// Level 2
 		// Level 1
 	// Base level
 
