@@ -111,8 +111,8 @@ In order to increase readability of the code it is allowed to use spaces **or** 
 1. Multiple function calls.
 2. Concatenating a long message.
 
-    $those    = examples($are);
-    $the      = best($ones);
+	$those    = examples($are);
+	$the      = best($ones);
 
-    $message  = 'this message is spread over ';
-    $message .= 'multiple lines.';
+	$message  = 'this message is spread over ';
+	$message .= 'multiple lines.';
